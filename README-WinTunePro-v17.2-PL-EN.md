@@ -1,5 +1,5 @@
-# WinTunePro v17.2 Ultra Debloat BETA  
-# WinTunePro v17.2 Ultra Debloat BETA
+ WinTunePro v17.2 Ultra   
+ WinTunePro v17.2 Ultra 
 
 > **PL:** Największa aktualizacja WinTunePro przygotowana dla DEV / BETA / TESTERÓW.  
 > **EN:** The biggest WinTunePro update prepared for DEV / BETA / TESTER users.
@@ -8,9 +8,9 @@
 
 ## 🇵🇱 Polski
 
-# WinTunePro v17.2 Ultra Debloat BETA
+# WinTunePro v17.2 Ultra 
 
-**WinTunePro v17.2 Ultra Debloat BETA** to największa aktualizacja projektu przygotowana dla **DEV / BETA / TESTERÓW**.  
+**WinTunePro v17.2 Ultra  to największa aktualizacja projektu przygotowana dla **DEV / BETA / TESTERÓW**.  
 Wersja 17.2 wprowadza osobne buildy dla PowerShell 5.1 i PowerShell 7, nowy opcjonalny interfejs BIOS UI, rozbudowany rollback, trwalsze cofanie Debloatu, Self-Test, raporty błędów oraz najmocniejszy publiczny profil **Ultra Debloat BETA**.
 
 Projekt został uporządkowany tak, aby zachować klasyczny panel WinTunePro jako główny interfejs, a nowe funkcje v17.2 zintegrować jako część programu, a nie jako osobny techniczny projekt.
@@ -21,7 +21,7 @@ Projekt został uporządkowany tak, aby zachować klasyczny panel WinTunePro jak
 
 | Element | Opis |
 |---|---|
-| Wersja | WinTunePro v17.2 Ultra Debloat BETA |
+| Wersja | WinTunePro v17.2 Ultra |
 | Status | DEV / BETA / TESTER release |
 | Buildy | Osobno PowerShell 5.1 i PowerShell 7 |
 | Domyślny interfejs | Klasyczny panel WinTunePro |
@@ -338,7 +338,7 @@ WinTunePro v17.2 jest dużo bliżej wersji publicznej niż wcześniejsze buildy.
 
 ## Podsumowanie
 
-WinTunePro v17.2 Ultra Debloat BETA to największa aktualizacja projektu.
+WinTunePro v17.2 Ultra  to największa aktualizacja projektu.
 
 Wprowadza:
 
@@ -363,9 +363,9 @@ Ta wersja jest przeznaczona przede wszystkim dla testerów, użytkowników zaawa
 
 ## 🇬🇧 English
 
-# WinTunePro v17.2 Ultra Debloat BETA
+# WinTunePro v17.2 Ultra 
 
-**WinTunePro v17.2 Ultra Debloat BETA** is the biggest update of the project, prepared for **DEV / BETA / TESTER** users.  
+**WinTunePro v17.2 Ultra ** is the biggest update of the project, prepared for **DEV / BETA / TESTER** users.  
 Version 17.2 introduces separate builds for PowerShell 5.1 and PowerShell 7, a new optional BIOS-style UI, improved rollback, persistent Debloat restore, Self-Test, error reports, and the strongest public profile: **Ultra Debloat BETA**.
 
 The project has been reorganized so that the classic WinTunePro panel remains the main interface, while the new v17.2 features are integrated into the program instead of being a separate technical side-project.
