@@ -1,29 +1,29 @@
 # Changelog
 
-## 17.2 — Ultra Debloat BETA, trwały rollback i stabilizacja (PS5 i PS7)
+## 17.2 Ultra Debloat BETA, trwały rollback i stabilizacja (PS5 i PS7)
 
-**PL — Główne wydanie.** Oba buildy — PowerShell 7 (zalecany) oraz Windows PowerShell 5.1 — mają identyczną funkcjonalność. Cały kod przeszedł pełny przegląd składni: statyczna analiza (Script Doctor v1.1) kończy się z wynikiem **0 błędów** w obu buildach.
+**PL Główne wydanie.** Oba buildy PowerShell 7 (zalecany) oraz Windows PowerShell 5.1 mają identyczną funkcjonalność. Cały kod przeszedł pełny przegląd składni: statyczna analiza (Script Doctor v1.1) kończy się z wynikiem **0 błędów** w obu buildach.
 
 ### Bezpieczeństwo i odwracalność
-- **Trwały restore Debloatu** — każda zmiana (typy startu usług, zatrzymane usługi, wyłączone zadania, wartości rejestru z typem, wpisy Run, przeniesione skróty Startup, usunięte Appx) jest od razu zapisywana do `%LOCALAPPDATA%\WinTunePro\debloat-restore.json`. Debloat **[4] Przywróć** cofa zmiany także po zamknięciu narzędzia i po restarcie; po udanym przywróceniu plik jest archiwizowany, a stan w pamięci sesji pozostaje jako fallback.
+- **Trwały restore Debloatu** każda zmiana (typy startu usług, zatrzymane usługi, wyłączone zadania, wartości rejestru z typem, wpisy Run, przeniesione skróty Startup, usunięte Appx) jest od razu zapisywana do `%LOCALAPPDATA%\WinTunePro\debloat-restore.json`. Debloat **[4] Przywróć** cofa zmiany także po zamknięciu narzędzia i po restarcie; po udanym przywróceniu plik jest archiwizowany, a stan w pamięci sesji pozostaje jako fallback.
 - **Rollback rejestru od najnowszego do najstarszego** — pełne importy klucza nie nakładają już z powrotem wcześniejszych tweaków z tego samego klucza; `reg import` weryfikuje kod wyjścia.
 - Rollback czyta pola manifestu bezpiecznie (`Get-PropSafe`) — starsze wpisy Privacy bez `Type`/`BackupFile` nie wywracają rollbacku pod StrictMode; klucze utworzone przez skrypt są sprzątane przy cofaniu.
-- **DryRun nie modyfikuje systemu** — sprawdzenie `-DryRun` wykonuje się przed utworzeniem klucza i przed eksportem backupu.
+- **DryRun nie modyfikuje systemu** sprawdzenie `-DryRun` wykonuje się przed utworzeniem klucza i przed eksportem backupu.
 - **Privacy** przechodzi przez wspólną, bezpieczną warstwę rejestru (`Set-RegistryValueSafe`): spójny manifest, backup, DryRun i rollback.
 - Debloat tworzy punkt przywracania przed pierwszą zmianą; `ScheduledDefrag` nie jest wyłączany (Windows używa go do retrim SSD).
 
 ### Nowe funkcje
-- **Debloat [8] ULTRA Debloat BETA** — najbardziej agresywny, testowy poziom zbudowany na Maksymalnym: dodatkowo ogranicza usługi per‑user/synchronizacji, więcej zadań, wpisów rejestru, pakietów Appx i autostartu. Wymaga trzech potwierdzeń (`YES` → `ULTRA` → `YES ULTRA`) z pełnym podglądem read‑only przed pierwszym. Świadomie nie rusza Defendera, rdzenia Windows Update i Store, powłoki, audio, sieci, sterowników GPU ani anticheata; usługi zawsze Manual, nigdy Disabled. Cofanie: Debloat [4] + punkt przywracania. Szczegóły: `ULTRA-DEBLOAT.md`.
+- **Debloat [8] ULTRA Debloat BETA** najbardziej agresywny, testowy poziom zbudowany na Maksymalnym: dodatkowo ogranicza usługi per‑user/synchronizacji, więcej zadań, wpisów rejestru, pakietów Appx i autostartu. Wymaga trzech potwierdzeń (`YES` → `ULTRA` → `YES ULTRA`) z pełnym podglądem read‑only przed pierwszym. Świadomie nie rusza Defendera, rdzenia Windows Update i Store, powłoki, audio, sieci, sterowników GPU ani anticheata; usługi zawsze Manual, nigdy Disabled. Cofanie: Debloat [4] + punkt przywracania. Szczegóły: `ULTRA-DEBLOAT.md`.
 - **[23] Narzędzia inżynierskie** — raporty Preflight/Analyze/DryRun z katalogów `data/catalog/*.json` do folderu `runs\`. **Apply w tym wydaniu zapisuje wyłącznie manifest — nie wykonuje zmian w systemie.**
-- **Ostrzeżenie HKCU** — gdy elewacja UAC idzie na inne konto administratora niż zalogowany użytkownik pulpitu, narzędzie o tym informuje (tweaki HKCU trafiłyby do profilu konta elewowanego).
+- **Ostrzeżenie HKCU** gdy elewacja UAC idzie na inne konto administratora niż zalogowany użytkownik pulpitu, narzędzie o tym informuje (tweaki HKCU trafiłyby do profilu konta elewowanego).
 
 ### Poprawność i stabilność
 - **Pełna zgodność składni z PowerShell 5.1 i 7.x** — usunięte konstrukcje wywracające parser (niedomknięte bloki i cudzysłowy, nawiasy wewnątrz interpolacji, zwarte operatory typu `$x-eq'y'`), przepisane wielolinijkowe wyrażenia `if` w przypisaniach i wewnątrz hashtable. Build 5.1 nie zawiera żadnej składni tylko‑PS7 (ternary `?:`, `??`, `?.`).
-- **Wszystkie pliki `.ps1`/`.psm1` zapisane jako UTF‑8 z BOM** — poprawne polskie znaki i ramki interfejsu pod Windows PowerShell 5.1.
+- **Wszystkie pliki `.ps1`/`.psm1` zapisane jako UTF‑8 z BOM** poprawne polskie znaki i ramki interfejsu pod Windows PowerShell 5.1.
 - Ultra Debloat: naprawiony crash podglądu/wykonania spowodowany niespójną nazwą zmiennej listy Appx (`DebloatUltraApps` vs `DebloatUltraAppx`); dodany alias zgodności, więc starsze odwołania nie wywracają się pod `Set-StrictMode -Version Latest`.
 - Ujednolicona inicjalizacja zmiennych skryptowych (m.in. `$Script:BeforeAudit` w silniku porównań przed/po naprawie) — koniec z błędami typu „variable has not been set" pod StrictMode.
 - Repair: `Userinit` i ścieżka logu Sysprep budowane z `$env:SystemRoot` (koniec z hardkodowanym `C:\Windows`); usunięta no‑opowa pętla ConsentStore/`Deny`.
-- Optimize: usunięty martwy kod `$hasAnyRisk`; poprawiona numeracja menu ryzyka — VBS/Memory Integrity to punkt `5)`.
+- Optimize: usunięty martwy kod `$hasAnyRisk`; poprawiona numeracja menu ryzyka VBS/Memory Integrity to punkt `5)`.
 - Usunięta pseudo‑walidacja z auto‑rollbackiem dla `GameDVR_Enabled` i `Win32PrioritySeparation` (pojedyncza próbka RAM/CPU po kilku sekundach mierzyła szum, nie efekt tweaka) — tweaki stosują się normalnie, cofanie zapewnia manifest.
 - Nowy helper `Write-CatchWarn` w krytycznych ścieżkach zmieniających stan (restore Debloatu, rollback, zapisy Repair) — błędy nie znikają już w pustych `catch`.
 - System Score rozdzielony: **HealthScore** (realne sygnały kondycji: XMP, wiek sterownika GPU, RAM pressure) i **AdoptionScore** (zgodność z tweakami narzędzia) — świeży Windows nie jest już karany za samo nieużycie narzędzia.
